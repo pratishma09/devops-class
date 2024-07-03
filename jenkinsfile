@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // This is the ID of the Docker Hub credentials in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'npm install'
+                    } else {
+                        bat 'npm install'
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
