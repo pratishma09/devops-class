@@ -25,7 +25,16 @@ pipeline {
                 }
             }
         }
-    }
+        stage('Install Dependencies') {
+            steps {
+                    script {
+                        sh 'npm run build'
+                    }
+                }
+            }
+        }
+    
+
     post {
         success {
             echo 'Pipeline succeeded!'
