@@ -4,7 +4,7 @@ pipeline {
     tools {nodejs "Node v14.18.1"}
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // This is the ID of the Docker Hub credentials in Jenkins
+        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') 
     }
 
     stages {
@@ -18,11 +18,7 @@ pipeline {
             steps {
                 dir('all_in_docker/client') {
                 script {
-                    if (isUnix()) {
                         sh 'npm install'
-                    } else {
-                        bat 'npm install'
-                    }
                 }
             }
             }
