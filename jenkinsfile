@@ -4,7 +4,7 @@ pipeline {
     tools {nodejs "node 14"}
 
     environment {
-        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') 
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') 
     }
 
     stages {
