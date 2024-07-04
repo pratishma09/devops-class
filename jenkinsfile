@@ -31,7 +31,7 @@ pipeline {
             steps {
                 dir('all_in_docker/client') {
                     script {
-                        sh 'npm run build'
+                        sh 'CI=false npm run build'
                     }
                 }
             }
@@ -39,6 +39,13 @@ pipeline {
     }
 
     post {
+        always {
+            script {
+                
+                    sh 'mv all_in_docker/client/build /var/www/html'
+            }
+            cleanWs() 
+        }
         success {
             echo 'Pipeline succeeded!'
         }
