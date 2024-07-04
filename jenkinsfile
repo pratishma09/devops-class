@@ -13,7 +13,16 @@ pipeline {
                 checkout scm
             }
         }
-
+        stage('Build and Start Services') {
+            steps {
+                dir('all_in_docker') {
+                    script {
+                        sh 'docker-compose build'
+                        sh 'docker-compose up -d'
+                    }
+                }
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 dir('all_in_docker/client') {
