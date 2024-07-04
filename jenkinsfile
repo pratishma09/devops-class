@@ -76,7 +76,7 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                dir('all_in_docker') {
+                dir('all_in_docker/client') {
                     script {
                         dockerImage = docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                     }
