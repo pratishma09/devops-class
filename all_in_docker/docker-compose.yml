@@ -1,16 +1,53 @@
-version: '3'
+version: '3.7'
+
 services:
   frontend:
-    build: ./client/
+    image: imageName
     restart: always
     ports:
       - 3000:80
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 2
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      placement:
+        constraints:
+          - node.role == worker
+    networks:
+      - overlay_network
 
   backend:
-    build: ./server/
+    image: imageName
     restart: always
-    ports:
-      - 3001:3001
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 2
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      placement:
+        constraints:
+          - node.role == worker
+    networks:
+      - overlay_network
 
   mysql:
     image: mysql/mysql-server:5.7
@@ -20,11 +57,29 @@ services:
       MYSQL_DATABASE: employeeSystem
       MYSQL_ROOT_PASSWORD: mauFJcuf5dhRMQrjj
       MYSQL_ROOT_HOST: '%'
-    ports:
-      - 3306:3306
     volumes:
       - ./init.sql:/data/application/init.sql
       - mysql_server_data:/var/lib/mysql
-  
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - overlay_network
+
 volumes: 
   mysql_server_data:
+
+networks:
+  overlay_network:
+    driver: overlay
