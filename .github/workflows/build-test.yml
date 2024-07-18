@@ -29,8 +29,8 @@ jobs:
         username: ${{ secrets.REMOTE_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: 
-            sudo apt update
-            sudo apt install nginx
+            sudo apt update -y
+            sudo apt install nginx -y
 #            # cd /home/ubuntu/devops-class
             # git pull origin main
             # cd all_in_docker
