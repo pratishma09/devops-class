@@ -29,14 +29,14 @@ jobs:
         username: ${{ secrets.REMOTE_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: 
-            sudo apt update -y
-            sudo apt install nginx -y
-#            # cd /home/ubuntu/devops-class
-            # git pull origin main
-            # cd all_in_docker
-            # sudo docker-compose build
-            # sudo docker-compose up -d backend
-            # sudo docker-compose up -d frontend
+            whoami
+            git clone https://github.com/sshresthadh/devops-class.git
+            cd /home/ubuntu/devops-class
+            git pull origin main
+            cd all_in_docker
+            sudo docker-compose build
+            sudo docker-compose up -d backend
+            sudo docker-compose up -d frontend
 
     # - name: Transfer Build Files to Ubuntu Instance
     #   uses: appleboy/scp-action@master
