@@ -22,7 +22,7 @@ jobs:
       run: |
         ssh ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }} "ls"
         
-    - name: executing remote ssh commands using passwordss
+    - name: executing remote ssh commands using passwords
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_HOST }}
