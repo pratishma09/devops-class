@@ -18,9 +18,9 @@ jobs:
       with:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
-    - name: Update Git code on the serverssss
-      run: |
-        ssh ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }} "ls"
+    # - name: Update Git code on the serverssss
+    #   run: |
+    #     ssh ${{ secrets.REMOTE_USERNAME }}@${{ secrets.REMOTE_HOST }} "ls"
         
     - name: executing remote ssh commands using passwords
       uses: appleboy/ssh-action@master
